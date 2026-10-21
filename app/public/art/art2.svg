@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs>
+    <radialGradient id="r2" cx="35%" cy="30%">
+      <stop offset="0" stop-color="hsl(290,80%,35%)"/><stop offset="1" stop-color="#140f24"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#r2)"/>
+  <circle cx="520" cy="300" r="170" fill="hsl(370,75%,55%)" opacity="0.8"/>
+  <rect x="240" y="520" width="180" height="180" rx="24" fill="#8a2be2" opacity="0.55" transform="rotate(28 300 610)"/>
+  <path d="M120 580 Q 400 540 700 580" stroke="#e5484d" stroke-width="10" fill="none" opacity="0.7"/>
+  <text x="60" y="760" fill="#cfc7e8" font-family="monospace" font-size="34">VIBE #002</text>
+  <text x="60" y="80" fill="#8f83b5" font-family="monospace" font-size="22">starter art — replace with art2.png</text>
+</svg>
