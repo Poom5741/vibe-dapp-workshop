@@ -3,8 +3,8 @@
 > Owner: <you> · Status: prefilled starter — make it YOURS by editing §2 and §3
 
 ## 1. What it is
-A single-page NFT mint site for my collection, served at localhost:5173 by the Vite app
-in `app/`.
+A single-page NFT mint site for my collection, served at http://localhost:3000 by the
+Next.js app in `app/`.
 
 ## 2. What it looks like
 <!-- EDIT THIS to your taste — this is the part that makes it yours -->
@@ -31,12 +31,13 @@ mint button below. Works on a phone-width screen.
 ---
 
 ## Plan
-Files: `app/src/App.jsx`, `app/src/wallet.js`, `app/src/config.js`, `app/src/App.css`
-Libraries: react, ethers v6 (already in package.json)
+Files: `app/src/components/MintApp.jsx`, `app/src/wallet.js`, `app/src/config.js`,
+`app/src/app/globals.css`
+Libraries: next, react, ethers v6 (already in package.json)
 Order: config → wallet helpers → UI sections → mint flow → error messages
 
 ## Tasks
-1. [ ] `npm install && npm run dev` — page loads at localhost:5173 with starter art
+1. [ ] `cd app && npm install && npm run dev` — page loads at localhost:3000 with starter art
 2. [ ] Connect Wallet works; address shows when connected
 3. [ ] Wrong-network guard + switch button
 4. [ ] Quantity + total price display
@@ -44,5 +45,5 @@ Order: config → wallet helpers → UI sections → mint flow → error message
 6. [ ] My art replaces the starter art (same filenames, same folder)
 
 ## Verification
-Open localhost:5173 in a browser with the wallet installed: art visible, button opens
+Open localhost:3000 in a browser with the wallet installed: art visible, button opens
 wallet, switching networks works, mint shows a Snowtrace link after Deploy Station.

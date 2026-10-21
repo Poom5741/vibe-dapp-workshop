@@ -14,11 +14,14 @@ direction of an AI coding agent.
 ## The speckit loop (5 min — read `speckit/README.md` with the room)
 
 ```
-specify → plan → tasks → implement → LOOK at the real result → iterate
+requirements brief → YOUR spec → plan → tasks → implement → LOOK → iterate
 ```
 
-The **spec** (a short plain-language agreement of what you want) is the source of truth —
-not the prompt, not the agent's first draft.
+Each station starts from a **requirements brief** in `/requirements` — written like a
+client talking to you. It states what the client wants and the acceptance criteria, but
+the real decisions (theme, look, copy, layout) are **open on purpose**. Turning open
+requirements into a spec is what developers do. The spec you write — not the prompt, not
+the agent's first draft — is the source of truth.
 
 ## The 4-part recipe (this is the whole skill)
 

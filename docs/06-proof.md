@@ -10,7 +10,8 @@ cd app && npm run dev     # → http://localhost:3000
 
 Tell your agent (cheat card **B5**):
 > My deployed contract is 0x… . Put it in app/src/config.js, match the name/symbol, then
-> finish speckit/station-specs/wiring-spec.md.
+> help me tick every acceptance box in speckit/specs/wiring-spec.md — the spec I wrote
+> from requirements/R3-go-live.md.
 
 Then in the page: **Connect Wallet → quantity → Mint → approve in wallet.**
 Concept made visible: **frontend ↔ wallet ↔ contract** — the page asks, the wallet shows

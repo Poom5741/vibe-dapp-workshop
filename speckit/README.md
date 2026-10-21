@@ -10,16 +10,21 @@ truth. The agent turns spec → plan → tasks → working code, and *you* verif
 ## The 4-phase loop
 
 ```
-specify ──► plan ──► tasks ──► implement ──► LOOK at the real result ─┐
-    ▲                                                                 │
-    └────────────────── iterate: precise feedback, change only that ◄─┘
+requirements ──► YOUR spec ──► plan ──► tasks ──► implement ──► LOOK ─┐
+ (from the      (you decide)                                            │
+  facilitator)              ◄──────── iterate: precise feedback ───────┘
 ```
+
+You start each station from a **requirements brief** in `/requirements` — written like a
+client talking to you. The brief states what the client wants and the acceptance criteria,
+but leaves the real decisions (theme, look, copy, layout) **open on purpose**. Turning
+those open questions into a spec is the dev skill we teach.
 
 | Phase | File it produces | One rule |
 |-------|------------------|----------|
-| **specify** | `station-specs/<name>-spec.md` | Use the 4-part recipe (below) |
-| **plan** | same file, `## Plan` section | Name the files + libraries + order |
-| **tasks** | same file, `## Tasks` section | Small numbered steps, each checkable |
+| **specify** | `specs/<name>-spec.md` — YOURS | Answer the brief's open questions yourself |
+| **plan** | `## Plan` in the same file | Name the files + libraries + order |
+| **tasks** | `## Tasks` section | Small numbered steps, each checkable |
 | **implement** | actual code | After each task, look at the real result |
 
 ## The 4-part recipe (this is the whole skill)
@@ -48,10 +53,15 @@ Run the speckit.implement prompt, then show me the page.
 Or just say to your agent: *"follow speckit/README.md for my next change"* — `AGENTS.md`
 already teaches it the loop.
 
-## Worked examples (read these, then write yours)
+## Worked example of the flow (not of the answers)
 
-- `station-specs/build-spec.md` — the dApp page spec (mostly prefilled for you)
-- `station-specs/wiring-spec.md` — the post-deploy spec: put your real contract address in
+1. Read `requirements/R2-mint-dapp.md` — the client's asks + open questions.
+2. With your agent (`speckit.specify` prompt), answer the open questions → write
+   `specs/build-spec.md` yourself.
+3. plan → tasks → implement, one checkpoint at a time.
+
+The ONLY prefilled content in this repo is the acceptance criteria in the briefs.
+Everything between "the client wants" and "the code works" is yours to write.
 
 ## The constitution
 

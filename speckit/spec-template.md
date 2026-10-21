@@ -34,5 +34,5 @@ _(fill during the **tasks** phase)_
 3. [ ]
 
 ## Verification
-How will you KNOW it works? (e.g. "page at localhost:5173 shows art1.png and the button
+How will you KNOW it works? (e.g. "page at localhost:3000 shows art1.png and the button
 opens my wallet", "config.js contains my deployed address")

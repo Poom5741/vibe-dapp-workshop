@@ -23,14 +23,14 @@ The starter files there are `hero.svg`, `art1.svg`… — save yours with the SA
 
 ## B — Build station (0:50–1:20) · coding agent, `cd app && npm run dev` → localhost:3000
 
-**B1 — start from the spec**
-> Read AGENTS.md and speckit/station-specs/build-spec.md. Run speckit: update §2 (the look)
-> and §3 (behaviors) to match MY collection: "<name> — <tagline>". Then plan → tasks →
-> implement. After each task tell me what to check on the page.
+**B1 — start from the requirements, write YOUR spec**
+> Read requirements/R2-mint-dapp.md with me. Ask me its open questions one at a time and
+> write my answers into speckit/specs/build-spec.md. Then plan → tasks → implement,
+> telling me what to check on the page after each task.
 
 **B2 — precise feedback (the pattern)**
 > The hero image is stretched and the mint button is below the fold on my phone width.
-> Change only those two things.
+> Change only those two things. Update my build-spec.md if this changes the agreement.
 
 **B3 — explain like a tutor (reading is free)**
 > Explain what app/src/components/MintApp.jsx does in one paragraph, like I'm not a programmer.
@@ -42,7 +42,8 @@ The starter files there are `hero.svg`, `art1.svg`… — save yours with the SA
 
 **B5 — after deploy: wire it**
 > My deployed contract is 0x… . Put it in app/src/config.js and set the collection
-> name/symbol to match what I deployed. Then run speckit/station-specs/wiring-spec.md.
+> name/symbol to match what I deployed. Then finish the wiring spec I wrote from
+> requirements/R3-go-live.md.
 
 **B6 — recovery (falling back is normal)**
 > Something's broken. Reset the app to the starter state: `git checkout app/` then

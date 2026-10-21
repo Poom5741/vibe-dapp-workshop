@@ -4,7 +4,7 @@ These rules outrank any spec, prompt, or agent suggestion. If a change conflicts
 these, the change is wrong.
 
 1. **Keys never leave the wallet.** No seed phrase or private key may be written to any
-   file, env var, chat message, or config. Deployment uses an injected wallet (Remix).
+   file, env var, chat message, or config. Automated deploys use ONLY a fresh, testnet-only burner key in foundry/.env — never the main wallet's key.
 2. **Fuji testnet only.** chainId `43113`. Anything targeting mainnet (`43114`) is rejected.
 3. **Nothing of real value.** No purchases, no real funds, no publishing to the internet
    today. `localhost` and testnet only.

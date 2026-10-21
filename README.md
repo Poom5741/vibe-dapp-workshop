@@ -2,10 +2,12 @@
 
 A 2-hour, hands-on workshop for absolute beginners. You will: create a wallet, get free
 testnet AVAX, generate your collection's identity, **spec-driven-build a dApp with the
-speckit method**, deploy an ERC-721 contract to the Fuji testnet, and mint your first NFT.
+speckit method**, deploy an ERC-721 contract to the Fuji testnet with **Foundry**, and
+mint your first NFT.
 
-Everything in this repo works with **any AI coding agent** — ZCode, Claude Code, Cursor,
-Codex, Windsurf, Gemini CLI. The agent reads `AGENTS.md` and follows the stations.
+**Stack:** Foundry (contract + tests + deploy) · Next.js (frontend, ethers v6) · Avalanche Fuji (43113)
+**Works with any AI coding agent** — ZCode, Claude Code, Cursor, Codex, Windsurf, Gemini
+CLI. The agent reads `AGENTS.md` and follows the stations.
 
 ---
 
@@ -21,30 +23,38 @@ IDENTITY → FUEL → SPECKIT → ART → BUILD → DEPLOY → PROOF
 | 0:00 | **Web3 in 10** | Wallet, gas, contract, testnet — the four words | [docs/01-web3-in-10.md](docs/01-web3-in-10.md) |
 | 0:10 | **Fuel** | Create wallet → Fuji network → faucet → first transfer | [docs/02-fuji-faucet.md](docs/02-fuji-faucet.md) |
 | 0:25 | **Speckit** | Learn the spec → plan → tasks → build loop | [docs/03-speckit-method.md](docs/03-speckit-method.md) |
-| 0:40 | **Art** | Generate 3 NFT artworks + banner into `app/public/art/` | [docs/04-cheat-sheet.md](docs/04-cheat-sheet.md) A1–A4 |
-| 0:55 | **Build** | Run the scaffolded app, iterate with precise feedback | [docs/04-cheat-sheet.md](docs/04-cheat-sheet.md) B1–B6 |
-| 1:25 | **Deploy** | Paste the contract into Remix, deploy on Fuji | [docs/05-deploy-remix.md](docs/05-deploy-remix.md) |
-| 1:50 | **Proof** | Mint, read Snowtrace, wire your contract address in | [docs/06-proof.md](docs/06-proof.md) |
+| 0:35 | **Art** | Generate 3 NFT artworks + banner into `app/public/art/` | [docs/04-cheat-sheet.md](docs/04-cheat-sheet.md) A1–A4 |
+| 0:50 | **Build** | Run the scaffolded app, iterate with precise feedback | [docs/04-cheat-sheet.md](docs/04-cheat-sheet.md) B1–B6 |
+| 1:20 | **Deploy** | `forge test` → `forge script` → Fuji | [docs/05-deploy-foundry.md](docs/05-deploy-foundry.md) |
+| 1:45 | **Proof** | Mint, wire the address, read Snowtrace | [docs/06-proof.md](docs/06-proof.md) |
 
 ## ⚡ Quick Start (do this before the workshop)
 
 ```bash
-# 1. Clone and enter the repo
-git clone <this-repo-url> && cd vibe-dapp-workshop
+# 1. One-time tools
+curl -L https://foundry.paradigm.xyz | bash && foundryup     # Foundry
 
-# 2. Open your AI coding agent in this folder and say:
+# 2. Clone and set up
+git clone <this-repo-url> && cd vibe-dapp-workshop
+cd foundry && forge install foundry-rs/forge-std OpenZeppelin/openzeppelin-contracts --no-commit && cd ..
+cd app && npm install && cd ..
+
+# 3. Open your AI coding agent in this folder and say:
 #    "Read AGENTS.md and run the setup verification."
 node scripts/verify-setup.mjs
 
-# 3. Install the app
-cd app && npm install && npm run dev
-# → open http://localhost:5173
+# 4. Two servers, two terminals
+cd foundry && forge build && forge test -vv      # contract: compile + 7 tests
+cd app && npm run dev                            # frontend: http://localhost:3000
 ```
 
 ## 🔑 The Golden Rules (all day, every day)
 
-1. **Seed phrase on paper. Never screenshot, never type it anywhere, never give it to an AI.**
-2. **Keys never leave the wallet** — the wallet signs; no key ever goes into a file.
+1. **Main wallet seed phrase on paper.** Never screenshot, never type it anywhere, never
+   give it to an AI.
+2. **Keys never leave the wallet — with one taught exception:** automated deploys use a
+   **fresh, testnet-only burner wallet** whose key lives in `foundry/.env` (gitignored).
+   This is the pro pattern: a key in a file must never be able to hurt you.
 3. **Fuji testnet only** (chainId `43113`) — testnet money is free pretend-money.
 4. **The agent proposes, you dispose** — read every approval popup.
 
@@ -53,12 +63,13 @@ cd app && npm install && npm run dev
 ```
 AGENTS.md            ← the contract your AI agent reads (start here)
 FACILITATOR.md       ← run-of-show, checkpoints, fallbacks for the room
-speckit/             ← the speckit method: constitution, spec template, worked examples
+requirements/        ← per-station requirement briefs (the "client" — start each station here)
+speckit/             ← the method: constitution, spec template, and YOUR specs in speckit/specs/
 .github/prompts/     ← speckit.* prompt files any agent can pick up
-app/                 ← the starter dApp (Vite + React + ethers v6)
-contract/MyNFT.sol   ← the ERC-721 you deploy via Remix
-scripts/             ← verify-setup.mjs, check-balance.mjs
-docs/                ← one short doc per station + cheat sheet
+app/                 ← Next.js dApp (App Router, ethers v6, wallet connect + mint UI)
+foundry/             ← MyNFT.sol ERC-721, 7 Forge tests, Fuji deploy script
+scripts/             ← verify-setup.mjs · check-balance.mjs
+docs/                ← one short doc per station + printable cheat sheet
 ```
 
 ## 🚰 Faucets (Fuji testnet AVAX)
@@ -66,10 +77,11 @@ docs/                ← one short doc per station + cheat sheet
 1. Official: **https://faucet.avax.network** (paste your `0x…` address)
 2. Backup: **https://faucets.chain.link/fuji**
 3. Faucet down? Ask a helper — the distribution wallet send is itself a live P2P demo.
+4. Verify it landed: `node scripts/check-balance.mjs 0xYourAddress`
 
 ## ✅ You're done when
 
 - [ ] Non-zero Fuji balance + one completed transfer in your wallet history
-- [ ] Your localhost page shows **your art** and a Connect Wallet button that works
-- [ ] A deployed contract address on Fuji (your day's most important string)
+- [ ] Your localhost:3000 page shows **your art** and a Connect Wallet button that works
+- [ ] `forge test` green → a deployed contract address on Fuji (your day's most important string)
 - [ ] An NFT minted from **your** contract, visible on **https://testnet.snowtrace.io**

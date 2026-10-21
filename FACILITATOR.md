@@ -22,7 +22,8 @@ stations**, and **nobody stays at zero** (fallbacks below are mandatory, not opt
 
 - Metadata hosting / "art shows in wallet" → take-home mission (say so explicitly).
 - AI-as-tutor stretch (B6) → optional, only if the room is ahead.
-- Per-student Remix pace → the Remix ritual is fully follow-the-leader, one step at a time.
+- Per-student Foundry pace → deploy is fully follow-the-leader: everyone runs the same two
+  commands (`forge build && forge test`, then `forge script`) at the same time.
 
 ## The 25% rule (say it out loud at every gate)
 
@@ -34,15 +35,16 @@ from a known-good state. Falling back is normal, not failure."
 | Wallet/faucet | Helper sends from distribution wallet | live P2P demo — narrate it on Snowtrace |
 | Art | Starter art pack | already at `app/public/art/` — students keep their AI art as take-home |
 | Build | Starter template | `git checkout app/` inside the repo, `npm install && npm run dev` |
-| Deploy | Pre-made contract | `contract/MyNFT.sol` IS the pre-made contract — everyone pastes the same file, no generation step exists |
+| Deploy | Pre-made contract | `foundry/src/MyNFT.sol` IS the pre-made contract — everyone deploys the same tested file |
 
 ## Unstick scripts (helpers)
 
 - Dev server not opening → `cd app && npm install && npm run dev` (30 sec).
 - Images not showing → exact folder `app/public/art/`, exact filenames, hard refresh.
 - Wallet button silent → extension installed? logged in? unlocked? (back to Module 2 state)
+- `forge script` fails with no key/funds → burner wallet missing or unfunded (docs/05 §0);
+  helper distribution wallet tops it up.
 - Faucet empty/down → helper distribution wallet; also https://faucets.chain.link/fuji.
-- Remix "Injected provider" shows wrong chain → switch wallet to Fuji first, then refresh Remix.
 
 ## Pre-flight (facilitator, the day before)
 
