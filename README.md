@@ -28,6 +28,8 @@ IDENTITY → FUEL → SPECKIT → ART → BUILD → DEPLOY → PROOF
 | 1:20 | **Deploy** | `forge test` → `forge script` → Fuji | [docs/05-deploy-foundry.md](docs/05-deploy-foundry.md) |
 | 1:45 | **Proof** | Mint, wire the address, read Snowtrace | [docs/06-proof.md](docs/06-proof.md) |
 | after | **Go Live** | Real URL (Cloudflare) + art in wallets | [docs/07-go-live.md](docs/07-go-live.md) |
+| after | **Token Station** | Deploy + trade an ERC-20 with the room | [docs/08-token-station.md](docs/08-token-station.md) |
+| scale-up | **Assets on R2** | Move art + metadata to a bucket | [docs/09-r2-assets.md](docs/09-r2-assets.md) |
 
 ## ⚡ Quick Start (Windows and macOS — details in [docs/00-setup.md](docs/00-setup.md))
 
@@ -71,9 +73,10 @@ requirements/        ← per-station requirement briefs (the "client" — start 
 speckit/             ← the method: constitution, spec template, and YOUR specs in speckit/specs/
 .github/prompts/     ← speckit.* prompt files any agent can pick up
 app/                 ← Next.js dApp (App Router, ethers v6; static-export ready for Cloudflare)
-foundry/             ← MyNFT.sol ERC-721 (Enumerable), 7 Forge tests, Fuji deploy script
+foundry/             ← MyNFT.sol (ERC-721 Enumerable) + WorkToken.sol (ERC-20 faucet),
+                       13 Forge tests, Fuji deploy scripts for both
 scripts/             ← verify-setup.mjs · check-balance.mjs
-docs/                ← setup (00) + one doc per station (01–06) + go-live (07)
+docs/                ← setup (00) · stations (01–06) · go-live (07) · ERC-20 (08) · R2 (09)
 HANDOFF.md           ← pilot-run record: what broke, what we fixed, lessons
 ```
 

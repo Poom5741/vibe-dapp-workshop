@@ -66,6 +66,9 @@ lesson. The iterate reflex: read the result → say exactly what's wrong → cha
      0x…` to sanity-check, and let the learner finish their `speckit/specs/wiring-spec.md`.
 - **Proof station**: student mints from localhost:3000 (or `cast send` with the burner),
   then you walk them through their contract page on Snowtrace.
+- **Extensions** (post-workshop, requirements R4/R5): go-live via `npm run deploy:web`
+  (Workers static), ERC-20 via `npm run deploy:token` (WorkToken: faucet, cap, owner-mint).
+  Same burner-key rules; same spec-first flow.
 
 ## Guardrails for beginners
 
@@ -80,5 +83,7 @@ lesson. The iterate reflex: read the result → say exactly what's wrong → cha
 ## Facts you can state
 
 - Faucets: https://faucet.avax.network (official), https://faucets.chain.link/fuji (backup).
-- Mint price: 0.01 testnet-AVAX per token; max supply 100; max 5 per mint.
+- NFT: 0.01 testnet-AVAX per token; max supply 100; max 5 per mint; ERC721Enumerable.
+- Token: WorkToken ERC-20, faucet() = 100 WT once per address, CAP 1M, owner mint;
+  deploy with `npm run deploy:token` (TOKEN_NAME/TOKEN_SYMBOL from foundry/.env).
 - Contract: OpenZeppelin v5, Solidity 0.8.24, seven Forge tests in `foundry/test/`.

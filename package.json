@@ -10,7 +10,10 @@
     "build:app": "npm run build --prefix app",
     "build:forge": "forge build --root foundry",
     "test": "forge test --root foundry -vv",
-    "deploy": "forge script --root foundry script/DeployMyNFT.s.sol --rpc-url fuji --broadcast --slow"
+    "deploy": "forge script --root foundry script/DeployMyNFT.s.sol --rpc-url fuji --broadcast --slow",
+    "deploy:token": "forge script --root foundry script/DeployWorkToken.s.sol --rpc-url fuji --broadcast --slow",
+    "build:web": "next build app",
+    "deploy:web": "npm run build:web && npx --prefix app wrangler deploy"
   },
   "engines": {
     "node": ">=18"
