@@ -1,4 +1,4 @@
-import { BrowserProvider, Contract, parseEther } from "ethers";
+import { BrowserProvider, Contract, JsonRpcProvider, parseEther } from "ethers";
 import {
   CONTRACT_ADDRESS,
   FUJI_CHAIN_ID_DEC,
@@ -12,6 +12,9 @@ const ABI = [
   "function name() view returns (string)",
   "function totalSupply() view returns (uint256)",
   "function MAX_SUPPLY() view returns (uint256)",
+  "function balanceOf(address owner) view returns (uint256)",
+  "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint256)",
+  "function tokenURI(uint256 tokenId) view returns (string)",
 ];
 
 export function getProvider() {
@@ -71,6 +74,42 @@ export async function mint(recipient, qty) {
 
 export function shortAddress(addr) {
   return addr ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : "";
+}
+
+// Read-only calls — work without any wallet connected.
+export function getReadContract() {
+  return getContract(new JsonRpcProvider(FUJI_RPC));
+}
+
+export async function getMintStats() {
+  const contract = getReadContract();
+  const [supply, max] = await Promise.all([contract.totalSupply(), contract.MAX_SUPPLY()]);
+  return { minted: Number(supply), max: Number(max) };
+}
+
+// The connected wallet's tokens: ids → tokenURI → metadata JSON → image URL.
+// Uses the read-only provider so it also renders before the wallet is "unlocked".
+export async function getMyNfts(owner) {
+  const contract = getReadContract();
+  const balance = Number(await contract.balanceOf(owner));
+  const ids = [];
+  for (let i = 0; i < balance; i++) ids.push(Number(await contract.tokenOfOwnerByIndex(owner, i)));
+
+  return Promise.all(
+    ids.map(async (id) => {
+      let image = null;
+      try {
+        const uri = await contract.tokenURI(id);
+        const meta = await fetch(uri).then((r) => (r.ok ? r.json() : null));
+        image = meta?.image
+          ? new URL(meta.image, uri).toString() // resolve relative metadata paths
+          : null;
+      } catch {
+        /* metadata not set yet — the token still exists */
+      }
+      return { id, image };
+    })
+  );
 }
 
 export { FUJI_CHAIN_ID_DEC };

@@ -2,20 +2,22 @@
 pragma solidity ^0.8.24;
 
 import {ERC721} from "openzeppelin/token/ERC721/ERC721.sol";
+import {ERC721Enumerable} from "openzeppelin/token/ERC721/extensions/ERC721Enumerable.sol";
 import {Ownable} from "openzeppelin/access/Ownable.sol";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MyNFT — the workshop contract. Deploys to Avalanche Fuji (43113).
 //
 // Read-before-deploy ritual (60 seconds, meaning not syntax):
-//   is ERC721        → inherits the standard every wallet understands
-//   MAX_SUPPLY = 100 → the rule YOU chose
-//   mint()           → creates a token and assigns it to an address
-//   pause()          → owner-only emergency brake
+//   is ERC721          → inherits the standard every wallet understands
+//   ERC721Enumerable   → lets apps ask "which tokens does THIS address own?"
+//   MAX_SUPPLY = 100   → the rule YOU chose
+//   mint()             → creates a token and assigns it to an address
+//   pause()            → owner-only emergency brake
 // Once deployed these rules are PERMANENT — read first, deploy second.
 // ─────────────────────────────────────────────────────────────────────────────
 
-contract MyNFT is ERC721, Ownable {
+contract MyNFT is ERC721, ERC721Enumerable, Ownable {
     uint256 public constant MAX_SUPPLY = 100;
     uint256 public constant MINT_PRICE = 0.01 ether; // test AVAX on Fuji
     uint256 public constant MAX_PER_MINT = 5;
@@ -47,10 +49,6 @@ contract MyNFT is ERC721, Ownable {
         }
     }
 
-    function totalSupply() external view returns (uint256) {
-        return _nextTokenId - 1;
-    }
-
     function setPaused(bool value) external onlyOwner {
         paused = value;
     }
@@ -61,6 +59,25 @@ contract MyNFT is ERC721, Ownable {
 
     function _baseURI() internal view override returns (string memory) {
         return baseTokenURI;
+    }
+
+    // OZ v5: ERC721 + ERC721Enumerable both hook these — route through super.
+    function _update(address to, uint256 tokenId, address auth)
+        internal override(ERC721, ERC721Enumerable) returns (address)
+    {
+        return super._update(to, tokenId, auth);
+    }
+
+    function _increaseBalance(address account, uint128 value)
+        internal override(ERC721, ERC721Enumerable)
+    {
+        super._increaseBalance(account, value);
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public view override(ERC721, ERC721Enumerable) returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
     }
 
     function withdraw() external onlyOwner {

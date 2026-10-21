@@ -1,0 +1,7 @@
+# Cloudflare Workers static deploy — see docs/07-go-live.md
+# Serve the `next build` output (./out) as static assets. Free, no R2 needed.
+name = "mint"
+compatibility_date = "2026-01-01"
+
+[assets]
+directory = "./out"

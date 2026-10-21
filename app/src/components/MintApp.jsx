@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   connectWallet,
   getChainId,
   switchToFuji,
   mint,
+  getMintStats,
+  getMyNfts,
   shortAddress,
   FUJI_CHAIN_ID_DEC,
 } from "../wallet.js";
@@ -17,12 +19,39 @@ export default function MintApp() {
   const [qty, setQty] = useState(1);
   const [status, setStatus] = useState(null); // { kind: 'ok'|'err', text, tx? }
   const [busy, setBusy] = useState(false);
+  const [stats, setStats] = useState(null); // { minted, max }
+  const [myNfts, setMyNfts] = useState([]);
+
+  const hasContract = CONTRACT_ADDRESS !== "0x0000000000000000000000000000000000000000";
+
+  async function refreshStats() {
+    if (!hasContract) return;
+    try {
+      setStats(await getMintStats());
+    } catch {
+      /* contract not wired yet */
+    }
+  }
+
+  async function refreshMyNfts(addr) {
+    if (!hasContract || !addr) return;
+    try {
+      setMyNfts(await getMyNfts(addr));
+    } catch {
+      /* read-only failures are non-fatal */
+    }
+  }
+
+  useEffect(() => {
+    refreshStats();
+  }, []);
 
   async function onConnect() {
     try {
       const addr = await connectWallet();
       setAddress(addr);
       setChainId(await getChainId());
+      refreshMyNfts(addr);
     } catch (e) {
       setStatus(errStatus(e));
     }
@@ -38,7 +67,7 @@ export default function MintApp() {
   }
 
   async function onMint() {
-    if (CONTRACT_ADDRESS === "0x0000000000000000000000000000000000000000") {
+    if (!hasContract) {
       setStatus({
         kind: "err",
         text: "No contract yet — finish the Deploy Station (forge script), then put your address in src/config.js.",
@@ -54,6 +83,8 @@ export default function MintApp() {
         text: "Minted! 🎉 Your NFT is on Fuji. This is your on-chain receipt:",
         tx: txHash,
       });
+      refreshStats();
+      refreshMyNfts(address);
     } catch (e) {
       setStatus(errStatus(e));
     } finally {
@@ -82,7 +113,14 @@ export default function MintApp() {
       <header className="hero">
         <img className="banner" src="/art/hero.svg" alt={`${COLLECTION_NAME} banner`} />
         <div className="hero-bar">
-          <h1>{COLLECTION_NAME}</h1>
+          <div>
+            <h1>{COLLECTION_NAME}</h1>
+            {stats && (
+              <p className="counter">
+                Minted {stats.minted} / {stats.max}
+              </p>
+            )}
+          </div>
           <button className="btn connect" onClick={address ? undefined : onConnect}>
             {address ? shortAddress(address) : "Connect Wallet"}
           </button>
@@ -104,6 +142,28 @@ export default function MintApp() {
           </figure>
         ))}
       </section>
+
+      {myNfts.length > 0 && (
+        <section className="gallery">
+          <h2 className="section-title">My NFTs</h2>
+          <div className="my-grid">
+            {myNfts.map((nft) => (
+              <figure className="card" key={nft.id}>
+                {nft.image ? (
+                  <img src={nft.image} alt={`Token #${nft.id}`} />
+                ) : (
+                  <div className="placeholder">#{nft.id} · metadata pending</div>
+                )}
+                <figcaption>
+                  <a href={`${SNOWTRACE}/token/${CONTRACT_ADDRESS}?a=${nft.id}`} target="_blank" rel="noreferrer">
+                    Token #{nft.id} ↗
+                  </a>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mint">
         <label>

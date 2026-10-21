@@ -27,6 +27,7 @@ IDENTITY → FUEL → SPECKIT → ART → BUILD → DEPLOY → PROOF
 | 0:50 | **Build** | Run the scaffolded app, iterate with precise feedback | [docs/04-cheat-sheet.md](docs/04-cheat-sheet.md) B1–B6 |
 | 1:20 | **Deploy** | `forge test` → `forge script` → Fuji | [docs/05-deploy-foundry.md](docs/05-deploy-foundry.md) |
 | 1:45 | **Proof** | Mint, wire the address, read Snowtrace | [docs/06-proof.md](docs/06-proof.md) |
+| after | **Go Live** | Real URL (Cloudflare) + art in wallets | [docs/07-go-live.md](docs/07-go-live.md) |
 
 ## ⚡ Quick Start (Windows and macOS — details in [docs/00-setup.md](docs/00-setup.md))
 
@@ -69,10 +70,11 @@ FACILITATOR.md       ← run-of-show, checkpoints, fallbacks for the room
 requirements/        ← per-station requirement briefs (the "client" — start each station here)
 speckit/             ← the method: constitution, spec template, and YOUR specs in speckit/specs/
 .github/prompts/     ← speckit.* prompt files any agent can pick up
-app/                 ← Next.js dApp (App Router, ethers v6, wallet connect + mint UI)
-foundry/             ← MyNFT.sol ERC-721, 7 Forge tests, Fuji deploy script
+app/                 ← Next.js dApp (App Router, ethers v6; static-export ready for Cloudflare)
+foundry/             ← MyNFT.sol ERC-721 (Enumerable), 7 Forge tests, Fuji deploy script
 scripts/             ← verify-setup.mjs · check-balance.mjs
-docs/                ← one short doc per station + printable cheat sheet
+docs/                ← setup (00) + one doc per station (01–06) + go-live (07)
+HANDOFF.md           ← pilot-run record: what broke, what we fixed, lessons
 ```
 
 ## 🚰 Faucets (Fuji testnet AVAX)
@@ -85,6 +87,8 @@ docs/                ← one short doc per station + printable cheat sheet
 ## ✅ You're done when
 
 - [ ] Non-zero Fuji balance + one completed transfer in your wallet history
-- [ ] Your localhost:3000 page shows **your art** and a Connect Wallet button that works
-- [ ] `forge test` green → a deployed contract address on Fuji (your day's most important string)
+- [ ] Your localhost:3000 page shows **your art**, a Connect Wallet button that works,
+      a "Minted X / 100" counter, and a **My NFTs** section once you own tokens
+- [ ] `npm test` green → a deployed contract address on Fuji (your day's most important string)
 - [ ] An NFT minted from **your** contract, visible on **https://testnet.snowtrace.io**
+- [ ] (Go Live) the site at your workers.dev URL with your art showing in wallets

@@ -14,6 +14,12 @@ The learner is the developer; you are the scribe and challenger. The spec is THE
 3. The brief has "Open questions the client will NOT decide for you". Ask the learner
    these — one question at a time, in plain language. Offer 2–3 example answers to react
    to if they're stuck, but the choice is theirs. Do NOT answer your own questions.
+   **HARD GATE: at least 3 answers must be typed/approved by the LEARNER (not chosen by
+   you) before you may write the spec file.** If the learner says "you decide" / "ลุย" /
+   "go for it", refuse once, warmly: "the spec is the lesson — pick one, I'll type it
+   exactly as you say." Only if they still decline may you propose a draft clearly
+   labelled `DRAFT-PROPOSED-BY-AGENT` in the spec's Status line, so the facilitator can
+   spot it.
 4. Write the learner's answers into `speckit/specs/<name>-spec.md` using the template:
    §1 What it is · §2 What it looks like · §3 What it must do · §4 What to leave out.
    The brief's acceptance criteria go into §3 verbatim (they are checkable checkboxes).

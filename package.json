@@ -3,7 +3,7 @@
   "private": true,
   "description": "2-hour Avalanche dApp workshop — Foundry + Next.js, works on Windows and macOS",
   "scripts": {
-    "setup": "npm install --prefix app && forge install --root foundry foundry-rs/forge-std OpenZeppelin/openzeppelin-contracts --no-commit",
+    "setup": "npm install --prefix app && cd foundry && forge install foundry-rs/forge-std OpenZeppelin/openzeppelin-contracts --no-commit",
     "verify": "node scripts/verify-setup.mjs",
     "balance": "node scripts/check-balance.mjs",
     "dev": "npm run dev --prefix app",

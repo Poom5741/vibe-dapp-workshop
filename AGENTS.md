@@ -40,6 +40,8 @@ layout for them. Lightweight — the student has minutes, not days. See `speckit
 1. **specify** — ask the learner the brief's open questions one at a time, then write
    THEIR answers into `speckit/specs/<station>-spec.md` (template: `speckit/spec-template.md`).
    Acceptance criteria from the brief go in verbatim. Their confirmation gates the phase.
+   HARD GATE: ≥3 learner-typed answers before the spec file may be written; if the
+   learner fully delegates, label the spec `DRAFT-PROPOSED-BY-AGENT` (see the specify prompt).
 2. **plan** — one short section: files touched, libraries, order of work.
 3. **tasks** — numbered checklist of small verifiable steps.
 4. **implement** — do the tasks; after each, show the student the real result.

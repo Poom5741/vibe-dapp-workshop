@@ -29,16 +29,30 @@ you're on" is a lifelong habit.
 
 ## Faucet (3 min)
 
-A faucet gives free testnet tokens because testnet money has no value.
+A faucet gives free testnet tokens because testnet money has no value. **Try them in this
+order — faucet friction is the #1 dropout risk, so never stall on one:**
 
-| Faucet | URL |
-|--------|-----|
-| Official (first choice) | https://faucet.avax.network |
-| Backup | https://faucets.chain.link/fuji |
-| Down? | Helper distribution wallet — a live P2P demo |
+| # | Faucet | URL |
+|---|--------|-----|
+| 1 | Official | https://faucet.avax.network (→ core.app/tools/testnet-faucet) |
+| 2 | Chainlink | https://faucets.chain.link/fuji |
+| 3 | Third-party | https://www.allthatnode.com/avalanche.dsrv |
+| 4 | Down entirely? | Helper gas-holder wallet — a live P2P demo |
 
 Paste your `0x…` address → receive test AVAX. Verify it landed:
-`node scripts/check-balance.mjs 0xYourAddress`
+`npm run balance -- 0xYourAddress`
+
+### Appendix — graceful testnet switch (only if EVERY faucet fails)
+
+If the room must switch networks (e.g. another chain's faucet is up), the swap is a
+**one-file change** because all network constants live in `app/src/config.js`:
+
+1. Edit `app/src/config.js`: `FUJI_CHAIN_ID_DEC`, `FUJI_RPC`, `SNOWTRACE`, explorer.
+2. Edit `foundry/foundry.toml`: the `fuji` rpc endpoint URL (+ `[etherscan]` chain).
+3. `grep -rn 43113 app/src scripts` to catch strays (MintApp error text, wallet switch button).
+
+Tell your agent: *"Switch the whole project from Fuji to <chain> <chainId>. Network
+constants live in app/src/config.js and foundry/foundry.toml — change only those."*
 
 ## First transaction (3 min)
 
