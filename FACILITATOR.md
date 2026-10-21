@@ -39,7 +39,9 @@ from a known-good state. Falling back is normal, not failure."
 
 ## Unstick scripts (helpers)
 
-- Dev server not opening → `cd app && npm install && npm run dev` (30 sec).
+- Dev server not opening → `npm install && npm run dev` at the repo root (30 sec).
+- `cp`/`Copy-Item` differences → prefer the repo's npm scripts (`npm run setup`,
+  `npm test`, `npm run deploy`) — they are identical on Windows and macOS.
 - Images not showing → exact folder `app/public/art/`, exact filenames, hard refresh.
 - Wallet button silent → extension installed? logged in? unlocked? (back to Module 2 state)
 - `forge script` fails with no key/funds → burner wallet missing or unfunded (docs/05 §0);
@@ -48,9 +50,12 @@ from a known-good state. Falling back is normal, not failure."
 
 ## Pre-flight (facilitator, the day before)
 
-- [ ] Run `node scripts/verify-setup.mjs` on a loaner laptop — expect all green.
-- [ ] Fund the distribution wallet with test AVAX (~2 AVAX × student count ÷ 25 per transfer
-      is plenty; 0.5 AVAX per student covers mints at 0.01 × 5).
+- [ ] Run `npm run verify` on a loaner laptop — expect all green. Do it on BOTH a macOS
+      and a Windows machine if the room mixes OSes.
+- [ ] Windows quirk to expect: after installing Foundry, `forge` isn't found until a NEW
+      terminal is opened (PATH refresh). helpers know this.
+- [ ] Fund the gas-holder/distribution wallet with test AVAX (0.25 drip × student count
+      is plenty).
 - [ ] Confirm faucet.avax.network loads from the venue network; have Chainlink faucet open.
 - [ ] Projector shows: four words slide, cheat card, and a live dev server of this repo.
 - [ ] Print the cheat card from `docs/04-cheat-sheet.md` (one per student).

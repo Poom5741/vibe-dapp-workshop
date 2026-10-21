@@ -1,0 +1,18 @@
+{
+  "name": "vibe-dapp-workshop",
+  "private": true,
+  "description": "2-hour Avalanche dApp workshop — Foundry + Next.js, works on Windows and macOS",
+  "scripts": {
+    "setup": "npm install --prefix app && forge install --root foundry foundry-rs/forge-std OpenZeppelin/openzeppelin-contracts --no-commit",
+    "verify": "node scripts/verify-setup.mjs",
+    "balance": "node scripts/check-balance.mjs",
+    "dev": "npm run dev --prefix app",
+    "build:app": "npm run build --prefix app",
+    "build:forge": "forge build --root foundry",
+    "test": "forge test --root foundry -vv",
+    "deploy": "forge script --root foundry script/DeployMyNFT.s.sol --rpc-url fuji --broadcast --slow"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

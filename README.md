@@ -28,25 +28,28 @@ IDENTITY → FUEL → SPECKIT → ART → BUILD → DEPLOY → PROOF
 | 1:20 | **Deploy** | `forge test` → `forge script` → Fuji | [docs/05-deploy-foundry.md](docs/05-deploy-foundry.md) |
 | 1:45 | **Proof** | Mint, wire the address, read Snowtrace | [docs/06-proof.md](docs/06-proof.md) |
 
-## ⚡ Quick Start (do this before the workshop)
+## ⚡ Quick Start (Windows and macOS — details in [docs/00-setup.md](docs/00-setup.md))
 
 ```bash
-# 1. One-time tools
-curl -L https://foundry.paradigm.xyz | bash && foundryup     # Foundry
+# 1. One-time tools (per-OS commands in docs/00-setup.md)
+#    macOS:  brew install node;  curl -L https://foundry.paradigm.xyz | bash && foundryup
+#    Windows (PowerShell):  winget install OpenJS.NodeJS.LTS;  irm https://foundry.paradigm.xyz | iex;  foundryup
 
-# 2. Clone and set up
+# 2. Clone and set up — one command from the repo root
 git clone <this-repo-url> && cd vibe-dapp-workshop
-cd foundry && forge install foundry-rs/forge-std OpenZeppelin/openzeppelin-contracts --no-commit && cd ..
-cd app && npm install && cd ..
+npm install && npm run setup
 
 # 3. Open your AI coding agent in this folder and say:
 #    "Read AGENTS.md and run the setup verification."
-node scripts/verify-setup.mjs
+npm run verify
 
-# 4. Two servers, two terminals
-cd foundry && forge build && forge test -vv      # contract: compile + 7 tests
-cd app && npm run dev                            # frontend: http://localhost:3000
+# 4. Two commands, two terminals
+npm test        # contract: compile + 7 Forge tests
+npm run dev     # frontend: http://localhost:3000
 ```
+
+All learner-facing tooling is npm scripts + Node — no bash required, so PowerShell, cmd
+and zsh behave identically.
 
 ## 🔑 The Golden Rules (all day, every day)
 

@@ -13,12 +13,13 @@ at the bottom — same contract file, injected wallet, zero tooling.)
 
 ## 1. Install & build (5 min, helpers circulate)
 
+One-time tool install per OS is in **docs/00-setup.md** (macOS: curl+foundryup;
+Windows PowerShell: `irm https://foundry.paradigm.xyz | iex` then `foundryup`).
+
 ```bash
-curl -L https://foundry.paradigm.xyz | bash && foundryup   # once per machine
-cd foundry
-forge install foundry-rs/forge-std OpenZeppelin/openzeppelin-contracts --no-commit
-cp .env.example .env   # then paste your BURNER private key into DEPLOYER_KEY
-forge build
+npm run setup        # foundry libs + app deps (from repo root)
+cp foundry/.env.example foundry/.env   # PowerShell: Copy-Item foundry/.env.example foundry/.env
+npm test             # compile + run the 7 tests
 ```
 
 Compilation = human-readable Solidity → machine bytecode. The ABI (the contract's "menu"
@@ -37,6 +38,7 @@ out, pause. **Tests are the read-before-deploy ritual made executable.** Read
 ## 3. Deploy (5 min, all together)
 
 ```bash
+npm run deploy       # from the repo root — or, from foundry/:
 forge script script/DeployMyNFT.s.sol --rpc-url fuji --broadcast --slow
 ```
 

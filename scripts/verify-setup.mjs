@@ -6,6 +6,7 @@
  */
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+import { spawnSync } from "node:child_process";
 
 const root = process.cwd();
 let failures = 0;
@@ -15,7 +16,22 @@ function check(label, ok, hint = "") {
   if (!ok) failures++;
 }
 
+function commandExists(cmd) {
+  const res = spawnSync(cmd, ["--version"], { shell: process.platform === "win32" });
+  return res.status === 0;
+}
+
 console.log("\n🏔️  vibe-dapp-workshop — setup check\n");
+
+// Toolchain
+const [major] = process.versions.node.split(".").map(Number);
+check("Node.js ≥ 18", major >= 18,
+  `You have ${process.versions.node}. Install Node 18+: macOS "brew install node", Windows "winget install OpenJS.NodeJS.LTS".`);
+const hasForge = commandExists("forge");
+check("Foundry (forge) on PATH", hasForge,
+  process.platform === "win32"
+    ? "PowerShell: irm https://foundry.paradigm.xyz | iex  then  foundryup (open a NEW window after). WSL2 also works — see docs/00-setup.md."
+    : 'Run: curl -L https://foundry.paradigm.xyz | bash && foundryup  (then open a new terminal)');
 
 check("Repo layout", existsSync(join(root, "AGENTS.md")) && existsSync(join(root, "speckit/README.md")),
   "Run this from the repo root (the folder containing AGENTS.md).");
@@ -24,7 +40,7 @@ check("Repo layout", existsSync(join(root, "AGENTS.md")) && existsSync(join(root
 const app = join(root, "app");
 check("Next.js app present", existsSync(join(app, "package.json")) && existsSync(join(app, "src/app/page.jsx")));
 check("Dependencies installed", existsSync(join(app, "node_modules")),
-  "Run: cd app && npm install");
+  "Run: npm install   (installs app/ dependencies)");
 if (existsSync(join(app, "node_modules"))) {
   try {
     const pkg = JSON.parse(readFileSync(join(app, "package.json"), "utf8"));
@@ -59,7 +75,7 @@ if (existsSync(cfgPath)) {
 const fd = join(root, "foundry");
 check("Foundry project present", existsSync(join(fd, "foundry.toml")) && existsSync(join(fd, "src/MyNFT.sol")));
 check("Foundry deps (lib/)", existsSync(join(fd, "lib/forge-std")) && existsSync(join(fd, "lib/openzeppelin-contracts")),
-  "Run: cd foundry && forge install foundry-rs/forge-std OpenZeppelin/openzeppelin-contracts --no-commit");
+  "Run: npm run setup   (or: cd foundry && forge install foundry-rs/forge-std OpenZeppelin/openzeppelin-contracts --no-commit)");
 
 // Secrets guard
 const envPath = join(fd, ".env");
