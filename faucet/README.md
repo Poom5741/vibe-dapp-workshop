@@ -5,6 +5,7 @@ Cloudflare Turnstile captcha, per-IP daily cap). Runs as its own Cloudflare Work
 separate from the dApp's static Worker in `app/wrangler.toml`.
 
 - Wallet: `0xB5A90caf8f1Cf3Bd918e24bc42E7c37CDAd4C683` (fresh burner, testnet-only)
+- Live (test-captcha mode): https://fuji-faucet.poom-a1d.workers.dev
 - Tunables (drip amount, cooldown, caps, RPC): `wrangler.toml [vars]`
 - Secrets: `FAUCET_PRIVATE_KEY`, `TURNSTILE_SECRET` — in `.dev.vars` locally (gitignored),
   in Workers secrets in production. **Never commit or paste these.**

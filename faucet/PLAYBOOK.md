@@ -35,13 +35,15 @@ claimed as native convergence.
 | --- | --- | --- | --- |
 | 1 | One page serves: input, captcha, button, feedback | **verified** | ADE browser observation + proof `e5a83606` (page renders, chips populated) |
 | 2 | Status endpoint shows live faucet address/balance from Fuji RPC | **verified** | `GET /api/status` → `balanceAvax: "0.0"`, chainId 43113 (live RPC round-trip) |
-| 3 | Server-side Turnstile validation before funds move | **verified** (test keys) | missing token → 400; token verified via siteverify in drip path; real-secret swap documented — **re-verify at deploy** |
+| 3 | Server-side Turnstile validation before funds move | **verified** (test keys) | missing token → 400; token verified via siteverify in drip path; **deployed with test keys — real-key swap still pending** |
 | 4 | Bad address rejected with friendly message | **verified** | `POST /api/drip {address:"0x123"}` → 400 |
 | 5 | Per-address 24h cooldown in KV | **verified (logic)** | code path exercised via local KV (rate-limit branch before send); 24h re-request assertion deferred until funded — **not-verified end-to-end** |
 | 6 | Sends exactly 0.1 AVAX on chainId 43113 | **not-verified** | Requires funded treasury; blocked on instructor deposit. Everything before broadcast verified (balance pre-check returns 503 correctly) |
 | 7 | Friendly "faucet empty" error | **verified** | UI journey: fill → click → "Faucet is empty (balance 0.0 AVAX)…" (proof `e5a83606`) |
 | 8 | Private key never committed/logged/echoed | **verified** | key only in `faucet/.dev.vars` (gitignored); wallet address is public info |
-| 9 | Deploys to Cloudflare Workers | **not-verified** | Gated on instructor approval + Cloudflare login; runbook in `faucet/README.md` |
+| 9 | Deploys to Cloudflare Workers | **verified** | deployed via WSL wrangler (OAuth acct poom@charoenyost.com): https://fuji-faucet.poom-a1d.workers.dev — page 200, /api/status live, prod drip journey (captcha→KV→RPC→503 empty) passed; version e669a09f |
+
+Post-funding checklist (fresh pass required): fund wallet → real drip to a student address → tx visible on Snowtrace (closes rows 5, 6) → swap real Turnstile keys (closes row 3 fully).
 
 Checker identity: independent ADE browser session + curl suite against the running
 candidate (maker and checker share this machine — compact micro scale, disclosed).
