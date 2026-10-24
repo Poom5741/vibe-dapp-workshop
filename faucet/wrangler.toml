@@ -1,0 +1,25 @@
+# Fuji gas faucet — standalone Cloudflare Worker for the vibe-dapp workshop.
+# Separate from app/wrangler.toml (the dApp's static Worker) on purpose.
+name = "fuji-faucet"
+main = "src/worker.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+# Tunables — safe to edit and redeploy.
+DRIP_AMOUNT = "0.1"
+COOLDOWN_HOURS = "24"
+IP_DAILY_CAP = "5"
+CHAIN_ID = "43113"
+RPC_URL = "https://api.avax-test.network/ext/bc/C/rpc"
+EXPLORER_TX = "https://testnet.snowtrace.io/tx/"
+EXPLORER_ADDR = "https://testnet.snowtrace.io/address/"
+# Turnstile TEST site key (always passes). Swap for your real site key at deploy —
+# it is public, the matching SECRET is the sensitive half.
+TURNSTILE_SITE_KEY = "1x00000000000000000000AA"
+FAUCET_ADDRESS = "0xB5A90caf8f1Cf3Bd918e24bc42E7c37CDAd4C683"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+# Create yours with:  npx wrangler kv namespace create RATE_LIMIT
+# then paste the id below. Local `wrangler dev` simulates KV and ignores the id.
+id = "REPLACE_WITH_KV_NAMESPACE_ID"

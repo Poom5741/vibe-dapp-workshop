@@ -13,7 +13,9 @@
     "deploy": "forge script --root foundry script/DeployMyNFT.s.sol --rpc-url fuji --broadcast --slow",
     "deploy:token": "forge script --root foundry script/DeployWorkToken.s.sol --rpc-url fuji --broadcast --slow",
     "build:web": "next build app",
-    "deploy:web": "npm run build:web && npx --prefix app wrangler deploy"
+    "deploy:web": "npm run build:web && npx --prefix app wrangler deploy",
+    "faucet": "npm run dev --prefix faucet",
+    "deploy:faucet": "npm run deploy --prefix faucet"
   },
   "engines": {
     "node": ">=18"

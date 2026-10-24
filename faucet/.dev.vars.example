@@ -1,0 +1,5 @@
+# Copy this file to `.dev.vars` (wrangler reads it for local dev) — NEVER commit .dev.vars.
+# FAUCET_PRIVATE_KEY below is a FRESH testnet-only burner, not anyone's main wallet.
+FAUCET_PRIVATE_KEY=0xYOUR_FRESH_BURNER_PRIVATE_KEY
+# Turnstile TEST secret (always passes). Replace with your real secret for production.
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
