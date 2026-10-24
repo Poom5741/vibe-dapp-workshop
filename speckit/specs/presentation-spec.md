@@ -54,3 +54,9 @@ The presenter requested that learners work through requirements and speckit with
 Check all slide bounds at 1280×720 and a phone viewport; inspect representative screenshots; verify reveals, reverse navigation, slide selection, hash links, notes, fullscreen, editing/export and reduced motion. Check the generated HTML has no required network assets and no wallet integration. Confirm the remote branch contains the resulting commit.
 
 Verified: 44 slides; no text overflow or major-block overlap detected in the browser audit; all slides visually inspected in contact sheets. Browser checks passed for reveal/reverse navigation, first/last boundaries, hash navigation, notes, edit toggle, single active slide, inactive-slide isolation, offline assets, keyboard handling after control focus, 16:9 fit at 1280×720 and 390×844, and portable HTML export. JavaScript syntax checks passed. Reduced-motion and print overrides are included; print output was not separately exported. The remote commit is confirmed in the delivery message rather than recorded before the push occurs.
+
+### Approved revision: opening account setup
+
+Insert an always-visible account preparation slide before the cover, with GitHub and Cloudflare signup addresses, a brief purpose for each, and an email-verification/sign-in checkpoint. Existing users sign in. The deck now contains 45 slides. Update the pacing guide and rebuild the portable HTML; inspect the opening slide and verify layout and navigation before committing and pushing.
+
+Verified this revision: 45 slides pass the browser layout audit; navigation, boundaries, notes, editing, offline assets, responsive stage fit and HTML export pass. The opening slide was visually inspected at 1280x720 with both signup addresses visible.

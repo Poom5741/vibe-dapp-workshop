@@ -1,6 +1,6 @@
 # Vibe Code Your First dApp — presentation
 
-Open **[index.html](index.html)** in Chrome, Edge, Firefox or Safari. It contains 44 slides, embedded fonts and artwork, and works offline. No app setup or wallet is needed to present it.
+Open **[index.html](index.html)** in Chrome, Edge, Firefox or Safari. It contains 45 slides, embedded fonts and artwork, and works offline. No app setup or wallet is needed to present it.
 
 For a local HTTP preview, run this from the repository root:
 
@@ -26,20 +26,21 @@ Open `http://localhost:3818`. Stop the server with Ctrl+C after presenting. You 
 
 **Notes appear on the same screen as the slides.** Close them before projecting. This is not a separate private presenter window.
 
-Edits are saved in the current browser's local storage when available. Click **Export HTML** in edit mode to download a portable copy with your changes. Local edits do not change Git files, and rebuilding does not clear the browser's saved edits. Use a fresh browser profile to review the committed original. To make lasting source changes, edit `slides.json`, then rebuild.
+Edits are saved in the current browser's local storage when available. Click **Export HTML** in edit mode to download a portable copy with your changes. Local edits do not change Git files, and rebuilding does not clear the browser's saved edits. The account-setup edition uses a new storage key so older edits cannot land on shifted slides. Use a fresh browser profile to review the committed original. To make lasting source changes, edit `slides.json`, then rebuild.
 
 The deck honors the operating system's reduced-motion setting. It preserves its 16:9 composition on phones; landscape orientation is easier to read. Browser printing produces static slides with all steps visible; animation is retained only in HTML.
 
 ## Content and pacing
 
-- Slides 1–9: welcome and the presenter's AI journey.
-- Slides 10–23: Web3 foundations, Avalanche Fuji, wallet logic and MetaMask.
-- Slides 24–41: the repository's dApp, token standards and guided build checkpoints.
-- Slide 42: closing; slides 43–44: network details and sources.
+- Slide 1: register GitHub and Cloudflare accounts, verify email and sign in.
+- Slides 2–10: welcome and the presenter's AI journey.
+- Slides 11–24: Web3 foundations, Avalanche Fuji, wallet logic and MetaMask.
+- Slides 25–42: the repository's dApp, token standards and guided build checkpoints.
+- Slide 43: closing; slides 44–45: network details and sources.
 
 Suggested pacing is 20 minutes / 25 minutes / 65 minutes, with a 10-minute buffer. Have students finish tool installation before the session. Use the repository's fallback art if time is short. This is a different run-of-show from the original README station timetable.
 
-During slides 31–41, learners keep their own AI conversation, spec and app open. Leave each phase slide up while they work: requirements → specify → plan → tasks → implement → verify and refine. The prompts are for the learner to give their agent; technical commands and tests are handled by the agent. Speaker notes include suggested work periods, short facilitator remarks and checks to ask learners to demonstrate. Verification uses the spec's actual acceptance criteria, including unresolved or blocked items. Deployment still requires passing contract tests, a fresh testnet-only burner and explicit learner approval.
+During slides 32–42, learners keep their own AI conversation, spec and app open. Leave each phase slide up while they work: requirements → specify → plan → tasks → implement → verify and refine. The prompts are for the learner to give their agent; technical commands and tests are handled by the agent. Speaker notes include suggested work periods, short facilitator remarks and checks to ask learners to demonstrate. Verification uses the spec's actual acceptance criteria, including unresolved or blocked items. Deployment still requires passing contract tests, a fresh testnet-only burner and explicit learner approval.
 
 Personal-story facts come from the presenter. Notes indicate where to add spoken personal examples without inventing company details or outcomes. The product illustration uses the repository's fallback artwork and is labeled as a conceptual preview. Nothing in the deck connects to MetaMask or sends a transaction.
 

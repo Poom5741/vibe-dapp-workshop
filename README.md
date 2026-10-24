@@ -11,7 +11,7 @@ CLI. The agent reads `AGENTS.md` and follows the stations.
 
 ## Teaching presentation
 
-Open [presentation/index.html](presentation/index.html) locally for the 44-slide animated
+Open [presentation/index.html](presentation/index.html) locally for the 45-slide animated
 workshop: the presenter's AI journey, Web3 foundations, and building this dApp. It works
 offline, includes speaker notes, and uses the selected playful color-block design.
 See [presenter controls and editing instructions](presentation/README.md).

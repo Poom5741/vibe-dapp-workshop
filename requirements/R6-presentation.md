@@ -27,3 +27,7 @@ The build section supports the facilitator speaking while learners look at their
 ## Visual direction
 
 Present three title-slide choices before finalizing the visual design. English follows the content discussion; speaker-led density follows the live teaching use case.
+
+## Presenter revision - opening account setup
+
+Add the first slide before the welcome: students register GitHub and Cloudflare accounts. Show signup addresses, explain their roles briefly, and ask learners to finish email verification and sign in. Existing account holders can simply sign in.

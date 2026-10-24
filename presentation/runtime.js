@@ -7,7 +7,7 @@ class SlidePresentation {
     this.step = 0;
     this.editing = false;
     this.lastWheel = 0;
-    this.storageKey = 'vibe-dapp-presentation-v1-edits';
+    this.storageKey = 'vibe-dapp-presentation-v2-edits';
     this.restoreEdits();
     this.populateIndex();
     this.bindEvents();
