@@ -10,6 +10,10 @@ Create an animated HTML presentation for a beginner workshop using this reposito
 
 The audience includes nontechnical people, with or without coding experience. The presenter approved the three-part outline and requested implementation, commit and push.
 
+## Presenter revision — guided work time
+
+The build section supports the facilitator speaking while learners look at their own screens and talk with AI. Teach requirements → specify → plan → tasks → implement, with verification against the specification. Replace manual terminal-command instructions with learner prompts and observable phase checkpoints. Agents run technical checks; learners make decisions, approve external actions and inspect the evidence. Include facilitator notes for work periods, questions to ask and moments to leave the room quiet.
+
 ## Acceptance criteria
 
 - [ ] A multi-slide HTML presentation opens locally without an application build.

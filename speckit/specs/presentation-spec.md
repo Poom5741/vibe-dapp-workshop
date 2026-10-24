@@ -47,6 +47,10 @@ Order: record requirements; select a visual direction; compile content and inter
 
 ## Verification
 
+### Approved revision: conversation-led build section
+
+The presenter requested that learners work through requirements and speckit with their AI, rather than follow manual commands such as `npm test`. Revise slides 31–41 into phase prompts and acceptance checkpoints, with facilitator talking points for independent work time. Preserve the selected design, the first two sections, the 44-slide count and the test-before-deployment safety gate. The agent performs technical checks; the learner verifies the actual result against their spec. Rebuild, check the changed slide layouts, then commit and push under the existing delivery authorization.
+
 Check all slide bounds at 1280×720 and a phone viewport; inspect representative screenshots; verify reveals, reverse navigation, slide selection, hash links, notes, fullscreen, editing/export and reduced motion. Check the generated HTML has no required network assets and no wallet integration. Confirm the remote branch contains the resulting commit.
 
 Verified: 44 slides; no text overflow or major-block overlap detected in the browser audit; all slides visually inspected in contact sheets. Browser checks passed for reveal/reverse navigation, first/last boundaries, hash navigation, notes, edit toggle, single active slide, inactive-slide isolation, offline assets, keyboard handling after control focus, 16:9 fit at 1280×720 and 390×844, and portable HTML export. JavaScript syntax checks passed. Reduced-motion and print overrides are included; print output was not separately exported. The remote commit is confirmed in the delivery message rather than recorded before the push occurs.

@@ -39,6 +39,8 @@ The deck honors the operating system's reduced-motion setting. It preserves its 
 
 Suggested pacing is 20 minutes / 25 minutes / 65 minutes, with a 10-minute buffer. Have students finish tool installation before the session. Use the repository's fallback art if time is short. This is a different run-of-show from the original README station timetable.
 
+During slides 31–41, learners keep their own AI conversation, spec and app open. Leave each phase slide up while they work: requirements → specify → plan → tasks → implement → verify and refine. The prompts are for the learner to give their agent; technical commands and tests are handled by the agent. Speaker notes include suggested work periods, short facilitator remarks and checks to ask learners to demonstrate. Verification uses the spec's actual acceptance criteria, including unresolved or blocked items. Deployment still requires passing contract tests, a fresh testnet-only burner and explicit learner approval.
+
 Personal-story facts come from the presenter. Notes indicate where to add spoken personal examples without inventing company details or outcomes. The product illustration uses the repository's fallback artwork and is labeled as a conceptual preview. Nothing in the deck connects to MetaMask or sends a transaction.
 
 ## Editing and rebuilding
